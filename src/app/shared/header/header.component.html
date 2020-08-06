@@ -9,8 +9,8 @@
         <span class="header__description">{{ description }}</span>
       </div>
       <span class="spacer"></span>
-      <img mat-card-avatar *ngIf="showProfile && userAuth.avatarUrl" [alt]="userAuth.name" class="img-circle" width="48" height="48" [src]="userAuth.avatarUrl" >
-      <img *ngIf="showProfile && !userAuth.avatarUrl" [alt]="userAuth.name" size="48" ngxGravatar [email]="userAuth.mail">
+      <img mat-card-avatar *ngIf="avatar.avatarUrl" class="img-circle" width="48" height="48" [alt]="avatar.name" [src]="avatar.avatarUrl">
+      <img ngxGravatar *ngIf="!avatar.avatarUrl" size="48" [alt]="avatar.name" [email]="avatar.mail">
     </mat-toolbar-row>
   </mat-toolbar>
 </header>

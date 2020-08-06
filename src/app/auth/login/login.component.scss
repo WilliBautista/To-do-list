@@ -1,19 +1,17 @@
-.login-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.main--login {
   text-align: center;
-  flex-direction: column;
-  min-height: 100vh;
 
-  .logo {
-    margin-bottom: 30px;
+  .brand {
+    margin-bottom: 24px;
   }
 
   .form {
+    display: flex;
+    flex-direction: column;
     min-width: 200px;
     max-width: 300px;
     width: 100%;
+    margin: 0 auto;
 
     &-field {
       width: 100%;

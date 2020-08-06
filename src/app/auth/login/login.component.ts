@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 // Models
-import { User } from './../../models/user.model';
+import { UserAuth } from './../../interfaces/user.interface';
 // Services
 import { LoginService } from '../../services/login.service';
 
@@ -34,10 +34,10 @@ export class LoginComponent {
       return;
     }
 
-    const user = new User(
-      userForm.form.value.username,
-      userForm.form.value.password
-    );
+    const user: UserAuth = {
+      name: userForm.form.value.username,
+      pass: userForm.form.value.password
+    };
 
     this.loginService.login(user)
       .subscribe(() => this.router.navigateByUrl('/tasks'));

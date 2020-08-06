@@ -13,7 +13,7 @@ import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateMod
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 // Modules
 import { SharedModule } from './../shared/shared.module';
-import { SweetAlert2Module, SweetAlert2LoaderService } from '@sweetalert2/ngx-sweetalert2';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 // Thirht
 import { GravatarModule } from 'ngx-gravatar';
 // Components
@@ -21,13 +21,17 @@ import { TasksComponent } from './tasks/tasks.component';
 import { CardTaskComponent } from '../components/card-task/card-task.component';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
+import { PagesComponent } from './pages.component';
+import { CreateUpdateTaskComponent } from '../components/create-update-task/create-update-task.component';
 
 @NgModule({
   declarations: [
     TasksComponent,
     CardTaskComponent,
+    CreateUpdateTaskComponent,
     CreateTaskComponent,
-    TaskDetailComponent
+    TaskDetailComponent,
+    PagesComponent
   ],
   exports: [],
   imports: [

@@ -1,10 +1,11 @@
-import { Observable, BehaviorSubject } from 'rxjs';
-import { LoginService } from 'src/app/services/login.service';
 // Core
-import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivationEnd } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 // Services
-import { UserService } from 'src/app/services/user.service';
+import { LoginService } from 'src/app/services/login.service';
 // Models/Interfaces
+import { UserService } from 'src/app/services/user.service';
 import { UserInfo } from 'src/app/interfaces/user.interface';
 
 @Component({
@@ -14,24 +15,42 @@ import { UserInfo } from 'src/app/interfaces/user.interface';
 })
 export class HeaderComponent implements OnInit {
 
-  public userAuth: UserInfo;
-
-  @Input() title: string;
-  @Input() description: string;
-  @Input() showProfile = true;
+  avatar: any;
+  title: string;
+  description: string;
 
   constructor(
     private userService: UserService,
-    private loginService: LoginService
-  ) {}
+    private loginService: LoginService,
+    private router: Router
+  ) {
+    this.router.events
+      .pipe(
+        filter((event: ActivationEnd) => event instanceof ActivationEnd),
+        filter((event: ActivationEnd) => event.snapshot.firstChild === null ),
+        map(data => data.snapshot )
+      ).subscribe(({ data }) => {
+          this.title = data.title;
+          this.description = data.description;
+        });
+  }
 
   ngOnInit() {
     this.userService.getUser(
         this.loginService.userValue.authtoken,
         this.loginService.userValue.csrfToken,
         this.loginService.userValue.id
-      ).subscribe((user: UserInfo) => {
-        this.userAuth = user;
+      ).pipe(
+        map((res: UserInfo) => {
+          const { avatarUrl, mail, name } = res;
+          return {
+            avatarUrl,
+            mail,
+            name
+          };
+        })
+      ).subscribe(res => {
+        this.avatar = res;
       });
   }
 }

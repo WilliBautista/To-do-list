@@ -30,6 +30,7 @@ p {
   color: #333D69;
 }
 
+// header
 .header {
   .mat-toolbar {
     background-color: $color1;
@@ -54,11 +55,14 @@ p {
   }
 }
 
+// Main content
 .main {
+  min-height: 100vh;
   padding: 24px 16px;
   background-color: $color3;
 }
 
+// circle images
 .img-circle {
   border-radius: 50%;
   overflow: hidden;

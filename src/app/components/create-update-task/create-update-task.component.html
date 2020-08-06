@@ -1,0 +1,32 @@
+<form autocomplete="off" [formGroup]="createTaskForm" (ngSubmit)="createTask()">
+  <!-- Username -->
+  <mat-form-field>
+    <mat-label>Título</mat-label>
+    <input matInput formControlName="title">
+  </mat-form-field>
+  <!-- Datepicker -->
+  <mat-form-field appearance="fill">
+    <mat-label>Fecha de finalización</mat-label>
+    <input matInput formControlName="finish_time" [min]="minDate" [ngxMatDatetimePicker]="picker" [min]="minDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <ngx-mat-datetime-picker #picker [showSpinners]="true" [touchUi]="false" color="primary"
+      [enableMeridian]="true">
+    </ngx-mat-datetime-picker>
+  </mat-form-field>
+  <!-- Description -->
+  <mat-form-field>
+    <mat-label>Descripción</mat-label>
+    <textarea matInput formControlName="description" rows="5"></textarea>
+  </mat-form-field>
+  <!-- Responsable autocomplete -->
+  <mat-form-field>
+    <mat-label>Responsable</mat-label>
+    <input matInput formControlName="responsable" type="text" [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let responsable of filterResponsables | async" [value]="responsable">
+        {{ responsable.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button mat-raised-button color="primary" aria-label="Crear una nueva tarea">Crear tarea</button>
+</form>

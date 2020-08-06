@@ -1,12 +1,12 @@
-<app-header title="To Do list" description="Página de detalle"></app-header>
 <!-- ---------------------- -->
-<!-- Start Tasks Details Component  -->
+<!-- Start Tasks Component  -->
 <!-- ---------------------- -->
-<main id="main-wrapper" class="main">
-  <div class="main-wrapper">
-    <app-card-task [task]="task" [detail]="true"></app-card-task>
-  </div>
-</main>
-<!-- ---------------------- -->
-<!-- End Tasks Details Component  -->
-<!-- ---------------------- -->
+<div class="main-header">
+  <h2>{{ task.title }}</h2>
+</div>
+<div class="main-content">
+  <app-card-task [task]="task" [detail]="true"></app-card-task>
+</div>
+<!-- -------------------- -->
+<!-- End Tasks Component  -->
+<!-- -------------------- -->

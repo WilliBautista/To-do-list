@@ -2,7 +2,7 @@
   <div class="card-task" [ngClass]="{ 'card-task--detail' : detail }">
     <div class="card-task__header">
       <div class="status" [ngClass]="task.status === '1' ? 'status-active' : 'status-finished'" >{{ task.status === "1" ? 'Activa' : 'Finalizada' }}</div>
-      <button *ngIf="task.status === '1'" mat-raised-button color="primary" (click)="addTime(task.task_id)">Agregar tiempo</button>
+      <button *ngIf="task.status === '1'" mat-raised-button color="primary" (click)="addTime(task.task_id)">Actualizar tarea</button>
     </div>
     <div class="card-task__content">
       <div class="card-task__content-header">
