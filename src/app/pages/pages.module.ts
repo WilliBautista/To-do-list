@@ -1,8 +1,9 @@
+// Core
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// Angular material
+// Angular material Modules
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -14,7 +15,7 @@ import { NgxMatMomentModule } from '@angular-material-components/moment-adapter'
 // Modules
 import { SharedModule } from './../shared/shared.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-// Thirht
+// Third parties
 import { GravatarModule } from 'ngx-gravatar';
 // Components
 import { TasksComponent } from './tasks/tasks.component';
@@ -23,15 +24,17 @@ import { CreateTaskComponent } from './create-task/create-task.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { PagesComponent } from './pages.component';
 import { CreateUpdateTaskComponent } from '../components/create-update-task/create-update-task.component';
+import { UpdateTaskComponent } from './update-task/update-task.component';
 
 @NgModule({
   declarations: [
+    PagesComponent,
     TasksComponent,
     CardTaskComponent,
+    TaskDetailComponent,
     CreateUpdateTaskComponent,
     CreateTaskComponent,
-    TaskDetailComponent,
-    PagesComponent
+    UpdateTaskComponent
   ],
   exports: [],
   imports: [

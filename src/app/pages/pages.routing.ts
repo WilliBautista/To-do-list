@@ -1,3 +1,4 @@
+import { UpdateTaskComponent } from './update-task/update-task.component';
 import { PagesComponent } from './pages.component';
 // Core
 import { Routes, RouterModule } from '@angular/router';
@@ -28,14 +29,23 @@ const routes: Routes = [
         path: 'create',
         component: CreateTaskComponent,
         data: {
-          title: 'Nueva tarea'
+          title: 'Crear nueva tarea'
         }
       },
       {
         path: ':title/:id',
         component: TaskDetailComponent,
+        pathMatch: 'full',
         data: {
           title: 'Detalle'
+        }
+      },
+      {
+        path: ':title/edit/:id',
+        component: UpdateTaskComponent,
+        pathMatch: 'full',
+        data: {
+          title: 'Actualizar tarea'
         }
       }
     ],

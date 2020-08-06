@@ -52,7 +52,8 @@ export class CardTaskComponent {
         Swal.fire(`¡La tarea "${ title }" fue eliminada exitosamente!`, '', 'success')
           .then(() => {
             if (this.detail) {
-              this.router.navigateByUrl('/tasks');
+              this.router.navigateByUrl('/tasks', { skipLocationChange: true })
+                .then(() => this.router.navigate(['/tasks/create']));
             }
           });
       });

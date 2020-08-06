@@ -35,8 +35,6 @@ export class TaskDetailComponent {
           res.responsable_id
         ).subscribe((user: UserInfo) => {
           res.responsable = user;
-          console.log(res);
-
           this.task = res;
         });
       });

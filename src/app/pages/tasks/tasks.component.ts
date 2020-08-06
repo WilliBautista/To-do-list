@@ -30,6 +30,7 @@ export class TasksComponent implements OnInit {
 
   ngOnInit() {
     const newArr: Task[] = [];
+
     this.tasksServices.getTasks(
         this.loginService.userValue.authtoken,
         this.loginService.userValue.csrfToken
@@ -40,8 +41,12 @@ export class TasksComponent implements OnInit {
             this.loginService.userValue.authtoken,
             this.loginService.userValue.csrfToken,
             task.responsable_id
+          ).pipe(
+            map(res => {
+              task.responsable = res;
+              return res;
+            })
           ).subscribe((res: UserInfo) => {
-            task.responsable = res;
             newArr[index] = task;
 
             if (this.loginService.userValue.id == res.id && task.status === '1') {
