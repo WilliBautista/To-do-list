@@ -1,0 +1,19 @@
+<ng-container>
+  <div class="login-page">
+    <div class="logo">
+      <img src="../../../assets/todolist.svg" width="80" height="80" alt="Todolist logo">
+    </div>
+    <form autocomplete="off" class="form" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+      <mat-form-field class="form-field">
+        <mat-label>Nombre de usuario</mat-label>
+        <input matInput ngModel name="username">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Contraseña</mat-label>
+        <input matInput ngModel name="password" type="password">
+      </mat-form-field>
+      <br>
+      <button mat-raised-button color="primary" >Iniciar sesión</button>
+    </form>
+  </div>
+</ng-container>

@@ -1,1 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Customization theme
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&display=swap');
+@import '~@angular/material/theming';
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Lato, sans-serif',
+  $headline: mat-typography-level(26px, 32px, 700),
+  $title: mat-typography-level(19px, 23px, 700),
+  $subheading-2: mat-typography-level(16px, 18px, 700),
+  $subheading-1: mat-typography-level(12px, 20px, 500),
+  $body-1: mat-typography-level(13px, 18px, 500)
+);
+
+@include mat-base-typography($custom-typography);
+
+$color1: #FFFFFF;
+$color2: #000000;
+$color3: #F3F5FA;
+$color4: #425195;
+
+* {
+  box-sizing: border-box;
+}
+html, body { height: 100%; }
+body { margin: 0; }
+
+p {
+  color: #333D69;
+}
+
+.header {
+  .mat-toolbar {
+    background-color: $color1;
+  }
+
+  &__left {
+    line-height: 18px;
+  }
+
+  &__wrapper {
+    padding-top: 38px;
+    padding-bottom: 40px;
+  }
+
+  &__description {
+    font-size: 14px;
+    color: $color4;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+}
+
+.main {
+  padding: 24px 16px;
+  background-color: $color3;
+}
+
+.img-circle {
+  border-radius: 50%;
+  overflow: hidden;
+}

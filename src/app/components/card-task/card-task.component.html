@@ -1,0 +1,44 @@
+<ng-container>
+  <div class="card-task" [ngClass]="{ 'card-task--detail' : detail }">
+    <div class="card-task__header">
+      <div class="status" [ngClass]="task.status === '1' ? 'status-active' : 'status-finished'" >{{ task.status === "1" ? 'Activa' : 'Finalizada' }}</div>
+      <button *ngIf="task.status === '1'" mat-raised-button color="primary" (click)="addTime(task.task_id)">Agregar tiempo</button>
+    </div>
+    <div class="card-task__content">
+      <div class="card-task__content-header">
+        <div class="card-task__content-header-avatar">
+          <img mat-card-avatar *ngIf="task.responsable.avatarUrl" [alt]="task.responsable.name" class="img-circle" width="24" height="24" src="{{ task.responsable.avatarUrl }}" >
+          <img mat-card-avatar *ngIf="!task.responsable.avatarUrl" [alt]="task.responsable.name" size="24" ngxGravatar [email]="task.responsable.mail">
+          <h4>{{ task.responsable.name }}</h4>
+        </div>
+        <div *ngIf="task.status === '1'" class="card-task__content-header-text">
+          <mat-icon aria-label="Icono de tiempo">schedule</mat-icon>Tiempo restante: {{ timeLeft(task.finish_time) }}
+        </div>
+      </div>
+      <div class="card-task__content-main">
+        <div class="card-title">
+          <h3 class="card-title">
+            {{ task.title }}
+          </h3>
+          <div class="card-actions">
+            <button mat-icon-button [matMenuTriggerFor]="editMenu" aria-label="Botón para abrir más opciones sobre está tarea">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #editMenu="matMenu" xPosition="before">
+              <button *ngIf="!detail" mat-menu-item routerLink="/tasks/{{ lowerText(task.title) }}/{{ task.task_id }}">
+                <mat-icon color="primary">visibility</mat-icon>
+                <span>Ver tarea</span>
+              </button>
+              <button mat-menu-item [swal]="[task.title, 'Está apunto de eliminar está tarea ¿desea continuar?', 'warning']" (confirm)="delete(task.title, task.task_id)">
+                <mat-icon>delete</mat-icon>
+                <span>Borrar</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+        <p *ngIf="detail" class="card-description text-justify">{{ task.description }}</p>
+        <p *ngIf="!detail" class="card-description text-justify">{{ task.description|slice:0:110 }}{{ task.description.length > 110 ? '...' : '' }}</p>
+      </div>
+    </div>
+  </div>
+</ng-container>

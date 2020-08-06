@@ -1,0 +1,19 @@
+<!-- ----------------------- -->
+<!-- Start Header Component  -->
+<!-- ----------------------- -->
+<header id="header" class="header">
+  <mat-toolbar class="header__wrapper">
+    <mat-toolbar-row>
+      <div class="header__left">
+        <h1>{{ title }}</h1>
+        <span class="header__description">{{ description }}</span>
+      </div>
+      <span class="spacer"></span>
+      <img mat-card-avatar *ngIf="showProfile && userAuth.avatarUrl" [alt]="userAuth.name" class="img-circle" width="48" height="48" [src]="userAuth.avatarUrl" >
+      <img *ngIf="showProfile && !userAuth.avatarUrl" [alt]="userAuth.name" size="48" ngxGravatar [email]="userAuth.mail">
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>
+<!-- --------------------- -->
+<!-- End Header Component  -->
+<!-- --------------------- -->

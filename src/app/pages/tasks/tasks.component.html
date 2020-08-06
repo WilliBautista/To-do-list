@@ -1,0 +1,20 @@
+<app-header title="To do list" [description]="dateNow|date:'EEEE, d MMMM'"></app-header>
+<!-- ---------------------- -->
+<!-- Start Tasks Component  -->
+<!-- ---------------------- -->
+<main id="main-wrapper" class="main">
+  <div class="main-wrapper">
+    <h2>Tareas <small>({{ countOwnTasks }} asignadas)</small></h2>
+
+    <div class="card-group">
+      <app-card-task *ngFor="let task of tasksSubject | async" [task]="task"></app-card-task>
+    </div>
+
+    <button mat-fab class="btn-add" color="primary" aria-label="Crear nueva tarea" [routerLink]="['/tasks/create']" >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</main>
+<!-- -------------------- -->
+<!-- End Tasks Component  -->
+<!-- -------------------- -->
