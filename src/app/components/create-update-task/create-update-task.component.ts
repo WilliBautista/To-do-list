@@ -1,17 +1,18 @@
 // Core
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
 // Interfaces
-import { NewTask } from 'src/app/interfaces/tasks.interface';
+import { NewTask, Task } from 'src/app/interfaces/tasks.interface';
 import { Responsable } from './../../interfaces/responsable.interface';
 // Services
 import { TasksService } from './../../services/tasks.service';
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -25,17 +26,29 @@ export class CreateUpdateTaskComponent implements OnInit {
   createTaskForm: FormGroup;
   responsables: Responsable[];
   filterResponsables: Observable<Responsable[]>;
+  action: string;
 
   constructor(
     private userService: UserService,
     private loginService: LoginService,
     private formBuilder: FormBuilder,
     private tasksService: TasksService,
-    private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.minDate = new Date();
     this.getResponsableUsers();
+
+    switch (this.activatedRoute.snapshot.paramMap.get('action')) {
+      case 'edit':
+        this.action = 'edit';
+        this.preloadTask();
+        break;
+      case 'create':
+        this.action = 'create';
+        break;
+    }
+
   }
 
   ngOnInit() {
@@ -47,6 +60,9 @@ export class CreateUpdateTaskComponent implements OnInit {
     });
   }
 
+  /**
+   * Direct access to the form controls
+   */
   get f() {
     return this.createTaskForm.controls;
   }
@@ -59,6 +75,14 @@ export class CreateUpdateTaskComponent implements OnInit {
     const filterValue = name.toLowerCase();
 
     return this.responsables.filter(responsable => responsable.name.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  /**
+   * Convert in lower and remove spaces
+   * @param text string to format as link
+   */
+  lowerText(text: string): string {
+    return text.toLowerCase().replace(/\s/ig, '-');
   }
 
   /**
@@ -97,7 +121,7 @@ export class CreateUpdateTaskComponent implements OnInit {
   /**
    * Create task in drupal
    */
-  createTask() {
+  createUpdateTask() {
     if (this.createTaskForm.invalid) {
       return false;
     }
@@ -113,22 +137,47 @@ export class CreateUpdateTaskComponent implements OnInit {
       },
     };
 
-    this.tasksService.createTask(
-        this.loginService.userValue.authtoken,
-        this.loginService.userValue.csrfToken,
-        newTask
-      ).subscribe(() => {
-        this.snackBar.open('¡Tarea creada correctamente!', '' , {
-          duration: 3000,
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom',
+    if (this.action === 'edit') {
+      newTask.id = this.activatedRoute.snapshot.paramMap.get('id');
+      this.tasksService.updateTask(
+          this.loginService.userValue.authtoken,
+          this.loginService.userValue.csrfToken,
+          newTask
+        ).subscribe(() => {
+          Swal.fire(`La tarea "${ newTask.title }" ha sido actualizada`, '', 'success')
+              .then(() => {
+                this.router.navigateByUrl(`/tasks/${ this.lowerText( newTask.title ) }/${ newTask.id }`);
+              });
         });
+    } else {
+      this.tasksService.createTask(
+          this.loginService.userValue.authtoken,
+          this.loginService.userValue.csrfToken,
+          newTask
+        ).subscribe((res: any) => {
+          const titleNew: string = res.title[0].value;
+          const idNew: number = res.nid[0].value;
 
-        setTimeout(() => {
-          this.router.navigateByUrl('/tasks', { skipLocationChange: true })
-            .then(() => this.router.navigate(['/tasks/create']));
-        }, 3000);
+          Swal.fire(`La tarea "${ titleNew }" ha sido creada`, '', 'success')
+              .then(() => {
+                this.router.navigateByUrl(`/tasks/${ this.lowerText( titleNew ) }/${ idNew }`);
+              });
+        });
+    }
+  }
+
+  preloadTask() {
+    this.tasksService.getTask(
+      this.loginService.userValue.authtoken,
+      this.loginService.userValue.csrfToken,
+      this.activatedRoute.snapshot.paramMap.get('id')
+    ).subscribe((res: Task) => {
+      this.createTaskForm.patchValue({
+        title: res.title,
+        description: res.description,
+        finish_time: new Date(res.finish_time),
       });
+    });
   }
 
 }

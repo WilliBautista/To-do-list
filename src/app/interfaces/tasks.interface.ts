@@ -6,6 +6,7 @@ export interface NewTask {
   finish_time: string;
   description: string;
   responsable: Responsable;
+  id?: string,
   type?: any[];
   _links?: any;
 }

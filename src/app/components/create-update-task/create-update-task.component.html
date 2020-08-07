@@ -1,4 +1,4 @@
-<form autocomplete="off" [formGroup]="createTaskForm" (ngSubmit)="createTask()">
+<form autocomplete="off" [formGroup]="createTaskForm" (ngSubmit)="createUpdateTask()">
   <!-- Username -->
   <mat-form-field>
     <mat-label>Título</mat-label>
@@ -28,5 +28,6 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <button mat-raised-button color="primary" aria-label="Crear una nueva tarea">Crear tarea</button>
+  <button *ngIf="action === 'create'" mat-raised-button color="primary" aria-label="Crear una nueva tarea">Crear tarea</button>
+  <button *ngIf="action === 'edit'" mat-raised-button color="primary" aria-label="Actualizar tarea">Actualizar tarea</button>
 </form>

@@ -1,15 +1,18 @@
-import { UpdateTaskComponent } from './update-task/update-task.component';
-import { PagesComponent } from './pages.component';
 // Core
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 // Services
 import { LoginGuard } from './../services/guards/login.guard';
 // Components
-import { TaskDetailComponent } from './task-detail/task-detail.component';
+import { PagesComponent } from './pages.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { CreateTaskComponent } from './create-task/create-task.component';
+import { UpdateTaskComponent } from './update-task/update-task.component';
+// Third parties
 import * as moment from 'moment';
+
+moment.locale('es');
 
 const routes: Routes = [
   {
@@ -22,30 +25,28 @@ const routes: Routes = [
         component: TasksComponent,
         data: {
           title: 'To Do List',
-          description: moment(new Date()).format('dddd, DD \d\e MMMM'),
+          description: moment(new Date()).format('dddd, DD MMMM'),
         },
       },
       {
-        path: 'create',
+        path: ':action',
         component: CreateTaskComponent,
         data: {
           title: 'Crear nueva tarea'
         }
       },
       {
-        path: ':title/:id',
-        component: TaskDetailComponent,
-        pathMatch: 'full',
+        path: ':action/:id/:title',
+        component: UpdateTaskComponent,
         data: {
-          title: 'Detalle'
+          title: 'Actualizar tarea'
         }
       },
       {
-        path: ':title/edit/:id',
-        component: UpdateTaskComponent,
-        pathMatch: 'full',
+        path: ':title/:id',
+        component: TaskDetailComponent,
         data: {
-          title: 'Actualizar tarea'
+          title: 'Detalle'
         }
       }
     ],

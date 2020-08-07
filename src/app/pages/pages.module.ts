@@ -1,3 +1,4 @@
+import { HeaderComponent } from './../shared/header/header.component';
 // Core
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
