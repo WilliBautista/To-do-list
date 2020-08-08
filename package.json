@@ -3,11 +3,17 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "lite": "lite-server",
+    "postinstall": "ng build --prod"
+  },
+  "engines": {
+    "node": "10.22.0",
+    "npm": "6.14.6"
   },
   "private": true,
   "dependencies": {
@@ -24,11 +30,14 @@
     "@angular/platform-browser-dynamic": "~9.1.12",
     "@angular/router": "~9.1.12",
     "@sweetalert2/ngx-sweetalert2": "^8.1.1",
+    "express": "^4.17.1",
     "moment": "^2.27.0",
     "ngx-gravatar": "^8.1.0",
+    "path": "^0.12.7",
     "sweetalert2": "^9.17.1",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "typescript": "~3.8.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.12",
