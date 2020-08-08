@@ -1,5 +1,5 @@
 {
-  "name": "to-do-list",
+  "name": "todolist",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,9 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "lite": "lite-server",
-    "postinstall": "ng build --prod"
+    "e2e": "ng e2e"
   },
   "engines": {
     "node": "10.22.0",
@@ -36,8 +34,7 @@
     "path": "^0.12.7",
     "sweetalert2": "^9.17.1",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2",
-    "typescript": "~3.8.3"
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.12",
