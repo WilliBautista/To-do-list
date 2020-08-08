@@ -1,3 +1,4 @@
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 // Core
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';

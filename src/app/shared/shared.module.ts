@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GravatarModule } from 'ngx-gravatar';
 // Modules
+import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 // Components
 import { HeaderComponent } from './header/header.component';
@@ -16,7 +17,8 @@ import { HeaderComponent } from './header/header.component';
   imports: [
     CommonModule,
     GravatarModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatMenuModule
   ]
 })
 export class SharedModule { }

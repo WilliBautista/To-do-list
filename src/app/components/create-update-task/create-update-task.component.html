@@ -7,7 +7,7 @@
   <!-- Datepicker -->
   <mat-form-field appearance="fill">
     <mat-label>Fecha de finalización</mat-label>
-    <input matInput formControlName="finish_time" [min]="minDate" [ngxMatDatetimePicker]="picker" [min]="minDate">
+    <input matInput formControlName="finish_time" [min]="minDate" [ngxMatDatetimePicker]="picker" [min]="minDate" size="250">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <ngx-mat-datetime-picker #picker [showSpinners]="true" [touchUi]="false" color="primary"
       [enableMeridian]="true">

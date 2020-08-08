@@ -9,8 +9,13 @@
         <span class="header__description">{{ description }}</span>
       </div>
       <span class="spacer"></span>
-      <img mat-card-avatar *ngIf="avatar.avatarUrl" class="img-circle" width="48" height="48" [alt]="avatar.name" [src]="avatar.avatarUrl">
-      <img ngxGravatar *ngIf="!avatar.avatarUrl" size="48" [alt]="avatar.name" [email]="avatar.mail">
+      <img mat-card-avatar [matMenuTriggerFor]="menuProfile" *ngIf="avatar.avatarUrl" class="img-circle" width="48" height="48" [alt]="avatar.name" [src]="avatar.avatarUrl">
+      <img ngxGravatar [matMenuTriggerFor]="menuProfile" *ngIf="!avatar.avatarUrl" size="48" [alt]="avatar.name" [email]="avatar.mail">
+      <mat-menu #menuProfile="matMenu" xPosition="before">
+        <button mat-menu-item (click)="logout()">
+          Cerrar sesión
+        </button>
+      </mat-menu>
     </mat-toolbar-row>
   </mat-toolbar>
 </header>

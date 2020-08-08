@@ -53,4 +53,8 @@ export class HeaderComponent implements OnInit {
         this.avatar = res;
       });
   }
+
+  logout() {
+    this.loginService.logout();
+  }
 }

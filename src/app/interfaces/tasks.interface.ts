@@ -6,13 +6,14 @@ export interface NewTask {
   finish_time: string;
   description: string;
   responsable: Responsable;
-  id?: string,
+  status?: string;
+  id?: string;
   type?: any[];
   _links?: any;
 }
 
 export interface Task {
-  task_id: string;
+  id: string;
   title: string;
   description: string;
   finish_time: string;

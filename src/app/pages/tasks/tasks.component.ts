@@ -20,13 +20,15 @@ export class TasksComponent implements OnInit {
   tasksSubject: BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>([]);
   tasks$: Observable<Task[]>;
   dateNow: number = Date.now();
-  countOwnTasks = 0;
+  countOwnTasks: number;
 
   constructor(
     private tasksServices: TasksService,
     private loginService: LoginService,
     private userLogin: UserService
-  ) {}
+  ) {
+    this.countOwnTasks = 0;
+  }
 
   ngOnInit() {
     const newArr: Task[] = [];

@@ -7,6 +7,7 @@
 <div class="main-content">
   <div class="card-group">
     <app-card-task *ngFor="let task of tasksSubject | async" [task]="task"></app-card-task>
+    <p *ngIf="countOwnTasks < 1">No existen tareas en este momento</p>
   </div>
 
   <button mat-fab class="btn-add" color="primary" aria-label="Crear nueva tarea" [routerLink]="['/tasks/create']" >
