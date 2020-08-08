@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UserAuth } from './../../interfaces/user.interface';
 // Services
 import { LoginService } from '../../services/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -40,6 +41,9 @@ export class LoginComponent {
     };
 
     this.loginService.login(user)
-      .subscribe(() => this.router.navigateByUrl('/tasks'));
+      .subscribe(
+        () => this.router.navigateByUrl('/tasks'),
+        () => Swal.fire('Usuario o clave incorrectos', 'Por favor intente de nuevo', 'error')
+      );
   }
 }
