@@ -21,6 +21,7 @@ export class TasksComponent implements OnInit {
   tasks$: Observable<Task[]>;
   dateNow: number = Date.now();
   countOwnTasks: number;
+  taskExist: boolean;
 
   constructor(
     private tasksServices: TasksService,
@@ -28,6 +29,7 @@ export class TasksComponent implements OnInit {
     private userLogin: UserService
   ) {
     this.countOwnTasks = 0;
+    this.taskExist = false;
   }
 
   ngOnInit() {
@@ -51,8 +53,11 @@ export class TasksComponent implements OnInit {
           ).subscribe((res: UserInfo) => {
             newArr[index] = task;
 
-            if (this.loginService.userValue.id == res.id && task.status === '1') {
-              this.countOwnTasks++;
+            if (task.status === '1') {
+              this.taskExist = true;
+              if (this.loginService.userValue.id == res.id) {
+                this.countOwnTasks++;
+              }
             }
           });
 

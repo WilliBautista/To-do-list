@@ -135,6 +135,7 @@ export class CreateUpdateTaskComponent implements OnInit {
         name: this.createTaskForm.value.responsable.name,
         id: this.createTaskForm.value.responsable.id,
       },
+      status: '1'
     };
 
     if (this.action === 'edit') {
