@@ -29,7 +29,7 @@ export class TasksComponent implements OnInit {
     private userLogin: UserService
   ) {
     this.countOwnTasks = 0;
-    this.taskExist = false;
+    this.taskExist = true;
   }
 
   ngOnInit() {
@@ -52,12 +52,10 @@ export class TasksComponent implements OnInit {
             })
           ).subscribe((res: UserInfo) => {
             newArr[index] = task;
+            this.taskExist = false;
 
-            if (task.status === '1') {
-              this.taskExist = true;
-              if (this.loginService.userValue.id == res.id) {
-                this.countOwnTasks++;
-              }
+            if (this.loginService.userValue.id == res.id && task.status === '1') {
+              this.countOwnTasks++;
             }
           });
 
