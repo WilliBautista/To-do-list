@@ -101,7 +101,7 @@ export class TasksService {
       body: [{ value: task.description }],
       field_estimated_time: [{ value: task.finish_time }],
       field_responsable: [{ target_id: task.responsable.id }],
-      status: [{value: task.status}],
+      status: [{value: task.status}] || '1',
     };
 
     // Send request
